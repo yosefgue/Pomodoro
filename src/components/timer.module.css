@@ -1,0 +1,42 @@
+.timer_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    height: 420px;
+    width: 420px;
+    transform: rotateZ(-90deg) rotateX(-180deg);
+}
+
+svg circle {
+    r: 200px;
+    cx: 210px;
+    cy: 210px;
+    stroke-width: 15px;
+    stroke: white;
+    fill: none;
+    stroke-dasharray: 1257px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    animation: countdown 10s linear infinite;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 1257px;
+  }
+}
+
+.timer {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 100px;
+    font-weight: 600;
+}
