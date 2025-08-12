@@ -9,12 +9,13 @@ export function Timer() {
     useEffect(() => {
         if (!timerOn) return;
         let startTime = Date.now();
-        setInterval(() => {
+        const intervalid = setInterval(() => {
             const now = Date.now();
             const elapsed = Math.floor((now - startTime) / 1000);
             const newseconds = startseconds - elapsed;
             setSeconds(newseconds)
-        }, 100)
+        }, 250)
+        return () => clearInterval(intervalid)
     }, [timerOn])
 
     const handleclick = () => {
