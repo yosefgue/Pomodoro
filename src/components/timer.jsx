@@ -1,10 +1,11 @@
 import styles from "./timer.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function Timer() {
-    let startseconds = 120;
-    let [timerOn, setTimerOn] = useState(false);
-    let [seconds, setSeconds] = useState(startseconds);
+    const startTimer = useRef(120);
+    const secondsremaining = useRef(startTimer.current);
+    const [timerOn, setTimerOn] = useState(false);
+    const [seconds, setSeconds] = useState(startTimer.current);
 
     useEffect(() => {
         if (!timerOn) return;
@@ -12,24 +13,39 @@ export function Timer() {
         const intervalid = setInterval(() => {
             const now = Date.now();
             const elapsed = Math.floor((now - startTime) / 1000);
-            const newseconds = startseconds - elapsed;
-            setSeconds(newseconds)
-        }, 250)
+            const remaining = startTimer.current - elapsed;
+            secondsremaining.current = remaining;
+            setSeconds(secondsremaining.current)
+        }, 100)
+        startTimer.current = secondsremaining.current;
         return () => clearInterval(intervalid)
     }, [timerOn])
 
-    const handleclick = () => {
+    const handlestart = () => {
         if (timerOn) return;
         setTimerOn(true)
     }
+
+    const handlestop = () => {
+        setTimerOn(false)
+    }
+
+    const handlereset = () => {
+        setTimerOn(false);
+        startTimer.current = 120;
+        secondsremaining.current = startTimer.current;
+        setSeconds(startTimer.current)
+    }
     
     return (
-        <div class={styles.timer_container}>
+        <div className={styles.timer_container}>
             <svg>
                 <circle></circle>
             </svg>
-            <div class={styles.timer}>{seconds}</div>
-            <button onClick={handleclick}>Start</button>
+            <div className={styles.timer}>{seconds}</div>
+            <button onClick={handlestart}>Start</button>
+            <button onClick={handlestop}>Stop</button>
+            <button onClick={handlereset}>Reset</button>
         </div>
     )
 }
