@@ -2,24 +2,51 @@ import styles from "./timer.module.css";
 import { useState, useEffect, useRef } from "react";
 
 export function Timer() {
-    const startTimer = useRef(120);
-    const secondsremaining = useRef(startTimer.current);
+    const focustimer = 10;
+    const breaktimer = 5;
+    const [breakamount, setbreakamount] = useState(0);
+    const [focusamount, setfocusamount] = useState(0);
+
+    const mode = useRef("focus")
+    const startFocusTimer = useRef(focustimer);
+    const remainingseconds = useRef(startFocusTimer.current);
     const [timerOn, setTimerOn] = useState(false);
-    const [seconds, setSeconds] = useState(startTimer.current);
+    const [minutes, setMinutes] = useState(startFocusTimer.current);
 
     useEffect(() => {
         if (!timerOn) return;
+
         let startTime = Date.now();
         const intervalid = setInterval(() => {
             const now = Date.now();
             const elapsed = Math.floor((now - startTime) / 1000);
-            const remaining = startTimer.current - elapsed;
-            secondsremaining.current = remaining;
-            setSeconds(secondsremaining.current)
+            remainingseconds.current = startFocusTimer.current - elapsed;
+            setMinutes(remainingseconds.current);
+            if (remainingseconds.current < 0) {
+                startTime = Date.now()
+                if (mode.current == "focus") {
+                    mode.current = "break";
+                    reset(breaktimer);
+                    setfocusamount((fs) => fs + 1);
+                }
+                else {
+                    mode.current = "focus";
+                    reset(focustimer);
+                    setbreakamount((br) => br + 1);
+                }
+            };
         }, 100)
-        startTimer.current = secondsremaining.current;
-        return () => clearInterval(intervalid)
-    }, [timerOn])
+        return () => {
+            clearInterval(intervalid)
+        }
+    }, [timerOn, mode])
+
+    const reset = (timeunit) => {
+        startFocusTimer.current = timeunit;
+        remainingseconds.current = timeunit;
+        setMinutes(timeunit);
+
+    }
 
     const handlestart = () => {
         if (timerOn) return;
@@ -27,14 +54,15 @@ export function Timer() {
     }
 
     const handlestop = () => {
+        startFocusTimer.current = remainingseconds.current;
         setTimerOn(false)
     }
 
     const handlereset = () => {
         setTimerOn(false);
-        startTimer.current = 120;
-        secondsremaining.current = startTimer.current;
-        setSeconds(startTimer.current)
+        startFocusTimer.current = focustimer;
+        remainingseconds.current = startFocusTimer.current;
+        setMinutes(startFocusTimer.current)
     }
     
     return (
@@ -42,10 +70,14 @@ export function Timer() {
             <svg>
                 <circle></circle>
             </svg>
-            <div className={styles.timer}>{seconds}</div>
-            <button onClick={handlestart}>Start</button>
-            <button onClick={handlestop}>Stop</button>
-            <button onClick={handlereset}>Reset</button>
+            <div className={styles.timer}>{minutes}<span>mins</span></div>
+            <div className={styles.buttonscontainer}>
+                <button onClick={handlestart}>Start</button>
+                <button onClick={handlestop}>Pause</button>
+                <button onClick={handlereset}>Reset</button>
+                <span>breaks amount: {breakamount}</span>
+                <span>focus amount: {focusamount}</span>
+            </div>
         </div>
     )
 }
