@@ -19,24 +19,21 @@ svg circle {
     stroke: white;
     fill: none;
     stroke-dasharray: 1257px;
-    stroke-dashoffset: 0px;
+    /* stroke-dashoffset: 0px; */
     stroke-linecap: round;
-    animation: countdown 10s linear infinite;
-}
-
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0px;
-  }
-  to {
-    stroke-dashoffset: 1257px;
-  }
+    transition: stroke-dashoffset 0.25s linear;
 }
 
 .timer {
     position: absolute;
+    white-space: nowrap;
+    border: 1px white solid;
+    width: 400px;
     margin: 0;
     padding: 0;
+    text-align: center;
     font-size: 100px;
     font-weight: 600;
+
+    font-family: "Chivo Mono", monospace;
 }
