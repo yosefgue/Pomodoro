@@ -50,7 +50,7 @@ export function Timer() {
         return () => {
             clearInterval(intervalID)
         }
-    }, [isTimerOn, mode])
+    }, [isTimerOn, mode, focusCount])
 
     const handleStartStop = () => {
         setIsTimerOn((previousTimerState) => !previousTimerState)
