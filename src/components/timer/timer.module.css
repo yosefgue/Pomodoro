@@ -13,7 +13,7 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .timer {
@@ -99,4 +99,13 @@ button {
 
 .done {
         background-color: white;
+}
+
+.modetext {
+    height: 15px;
+    padding: 0;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff2f;
 }

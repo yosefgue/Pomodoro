@@ -3,7 +3,7 @@ import styles from "./timer.module.css";
 import useTimer from "./useTimer.jsx"
 
 export default function Timer() {
-    const {handleReset, handleStartStop, seconds, isTimerOn, focusCount, focusTimer} = useTimer();
+    const {handleReset, handleStartStop, seconds, isTimerOn, focusCount, focusTimer, text} = useTimer();
     const minsUI = String(Math.floor(seconds / 60)).padStart(2, "0");
     const secsUI = String(seconds % 60).padStart(2, "0");
     const [isRotated, setIsRotated] = useState(false);
@@ -11,6 +11,7 @@ export default function Timer() {
     return (
     <div className={styles.allcontainer}>
         <div className={styles.timer_container}>
+            <div className={styles.modetext}>{text}</div>
             <div className={styles.timer}>{minsUI}:{secsUI}</div>
         </div>
         <div className={styles.circle_container}>
@@ -25,7 +26,7 @@ export default function Timer() {
                 {isTimerOn ? "pause" : "start"}
             </button>
             <button className={`${styles.resetbutton} ${isRotated ? styles.rotate : ""}`} onClick={() => {
-                handleReset(focusTimer, {stopTimer: true, resetMode: true, mode: "focus", resetFocusCount: true})
+                handleReset(focusTimer, {stopTimer: true, resetMode: true, mode: "focus", resetFocusCount: true, resetText: true})
                 setIsRotated(!isRotated)
                 }}>
                 <img src="/img/reset.svg" alt="reset"/>

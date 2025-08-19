@@ -15,6 +15,13 @@ export default function useTimer() {
     const [isTimerOn, setIsTimerOn] = useState(false);
     const [seconds, setSeconds] = useState(initialTimerValue.current);
 
+    const textOptions = {
+    focus: "Deep work time.",
+    break: "Take a breath.",
+    longbreak: "Relax, you've earned it."
+    };
+    const [text, setText] = useState("");
+
     useEffect(() => {
         if (!isTimerOn) return;
         
@@ -41,24 +48,34 @@ export default function useTimer() {
                     handleReset(focusTimer, {resetMode: true, mode: "focus"})
                 }
             };
-        }, 250)
+        }, 200)
+
+        if (mode == "focus") {
+                setText(textOptions.focus);
+            } else if (mode == "break") {
+                setText(textOptions.break);
+            } else {
+                setText(textOptions.longbreak);
+            }
+            
         return () => {
             clearInterval(intervalID)
         }
-    }, [isTimerOn, mode, focusCount, breakTimer, focusTimer, longBreakTimer])
+    }, [isTimerOn, mode, focusCount])
 
     const handleStartStop = () => {
         setIsTimerOn((previousTimerState) => !previousTimerState)
         if (!isTimerOn) initialTimerValue.current = remainingSeconds.current; //save timer progress, resume where left off
     }
 
-    const handleReset = (timerValue, options = {stopTimer: false, resetMode: false, mode: "focus", resetFocusCount: false}) => {
+    const handleReset = (timerValue, options = {stopTimer: false, resetMode: false, mode: "focus", resetFocusCount: false, resetText: false}) => {
         if (options.stopTimer) setIsTimerOn(false);
         if (options.resetMode) setMode(options.mode);
         if (options.resetFocusCount) setFocusCount(0);
+        if (options.resetText) setText("");
         initialTimerValue.current = timerValue;
         remainingSeconds.current = timerValue;
         setSeconds(timerValue);
     }
-   return {handleReset, handleStartStop, seconds, isTimerOn, focusCount, focusTimer}
+   return {handleReset, handleStartStop, seconds, isTimerOn, focusCount, focusTimer, text}
 }
