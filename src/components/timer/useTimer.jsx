@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import {focusTimer1, breakTimer1, longBreakTimer1} from "./timerConfig.js"
+import {focusTimer1, breakTimer1, longBreakTimer1} from "/src/components/timer/timerConfig.js"
 // All timer logic is done in seconds.
 export default function useTimer() {
     const focusTimer = focusTimer1;
@@ -16,9 +16,9 @@ export default function useTimer() {
     const [seconds, setSeconds] = useState(initialTimerValue.current);
 
     const textOptions = {
-    focus: "Deep work time.",
-    break: "Take a breath.",
-    longbreak: "Relax, you've earned it."
+    focus: "Concentrate and make progress.",
+    break: "Pause, breathe, relax.",
+    longbreak: "Take a long break, you did the hard work."
     };
     const [text, setText] = useState("");
 
@@ -35,7 +35,7 @@ export default function useTimer() {
                 timeBeforeInterval = Date.now()
                 if (mode == "focus") {
                     setFocusCount((count) =>count + 1)
-                    const updatedfocusCount = focusCount + 1; // react doesn't update state instantly only after the next render, so manual save
+                    const updatedfocusCount = focusCount + 1; // react doesn't update state instantly only after the next render, so manual save, there is probably a better solution
                     if (updatedfocusCount % 4 == 0) {
                         handleReset(longBreakTimer, {resetMode: true, mode: "longbreak"})
                     }
@@ -48,7 +48,7 @@ export default function useTimer() {
                     handleReset(focusTimer, {resetMode: true, mode: "focus"})
                 }
             };
-        }, 200)
+        }, 100)
 
         if (mode == "focus") {
                 setText(textOptions.focus);
