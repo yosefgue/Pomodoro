@@ -18,14 +18,15 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
+    width: 550px;
     height: 35px;
     font-size: 20px;
-    padding: 20px;
+    padding: 10px;
+    transition: 0.5s ease;
 }
 
 .input {
-    width: 340px;
+    width: 490px;
     height: 30px;
     border: none;
     padding: 10px;
@@ -36,17 +37,70 @@
     font-size: 20px;
     font-weight: 500;
     outline: none;
+    transition: width 0.5s ease, height 0.5s ease;
 }
 
 .input:focus {
     border: 2px #ffffff1d solid;
 }
 
-.todo {
-    width: 400px;
+.alltodocontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.onetodocontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff13 ;
+    width: 550px;
     border-radius: 15px;
+    padding: 15px 15px;
+    transition: 0.5s ease;
+}
+
+.options img {
+    height: 15px;
+    width: 15px;
+}
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.options:hover {
+    cursor: pointer;
+    scale: 1.5;
+}
+
+.todo {
+    flex: 1;
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
     font-size: 18px;
     font-weight: 500;
-    background-color: #ffffff13 ;
-    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .titlecontainer {
+        width: 400px;
+        
+    }
+    .input {
+        width: 345px;
+    }
+    .onetodocontainer {
+        width: 400px;
+    }
 }
