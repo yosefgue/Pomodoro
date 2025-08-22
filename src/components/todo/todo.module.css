@@ -56,18 +56,20 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #ffffff13 ;
+    background-color: #2424249d ;
     width: 550px;
     border-radius: 15px;
     padding: 15px 15px;
     transition: 0.5s ease;
 }
 
-.options img {
+.optionsbutton img {
     height: 15px;
     width: 15px;
 }
-.options {
+.optionsbutton {
+    cursor: pointer;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,9 +80,8 @@
     transition: 0.3s ease;
 }
 
-.options:hover {
-    cursor: pointer;
-    scale: 1.5;
+.optionsbutton:hover {
+    scale: 1.2;
 }
 
 .todo {
@@ -90,6 +91,29 @@
     word-break: break-word;
     font-size: 18px;
     font-weight: 500;
+}
+
+.optionsMenu {
+    position: absolute;
+    background-color: #181818;
+    bottom: 30px;
+    border-radius: 15px;
+    pointer-events: auto;
+}
+.option {
+    text-align: center;
+    padding: 10px;
+    transition: 0.3s ease;
+}
+.option.a {
+    border-radius: 15px 15px 0 0;
+}
+.option.b {
+    border-radius: 0 0 15px 15px;
+}
+
+.option:hover {
+    background-color: rgba(37, 37, 37, 0.74);
 }
 
 @media (max-width: 768px) {
@@ -102,5 +126,8 @@
     }
     .onetodocontainer {
         width: 400px;
+    }
+    .optionsbutton:hover {
+        scale: 1;
     }
 }
