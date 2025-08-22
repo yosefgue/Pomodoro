@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react"
 import styles from "./todo.module.css"
+import optionsIcon from "/img/options.svg";
 
 export default function Todo() {
     const [inputValue, setInputValue] = useState("");
     const [todos, setTodos] = useState([]);
 
-    const handleClick = () => {
+    const handleAdd = () => {
         if (inputValue == "") return;
         setTodos([...todos, {id: Date.now(), text: inputValue}])
         setInputValue("")
@@ -15,20 +16,33 @@ export default function Todo() {
         setTodos(todos.filter((todo) => todo.id !== id))
     }
 
+    const handleEnter = (e) => {
+        if (inputValue == "") return;
+        if (e.key === "Enter") {
+            setTodos([...todos, {id: Date.now(), text: inputValue, isDone: false}])
+            setInputValue("")
+        }
+    }
+
+    const handleDone = (id) => {
+        setTodos(todos.map((todo) => todo.id === id ? {...todo, isDone: !todo.isDone} : todo
+        ))
+    }
+
     return(
         <div className={styles.maincontainer}>
             <div className={styles.titlecontainer}>
-                <input className={styles.input} type="text" placeholder="add todo" value={inputValue} onChange={(e) => setInputValue(e.target.value)} ></input>
-                <span><button className={styles.addbutton} type="button" onClick={handleClick}><img src="/img/plus.svg" alt="add" /></button></span>
+                <input className={styles.input} type="text" placeholder="add todo" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={handleEnter} ></input>
+                <span><button className={styles.addbutton} type="button" onClick={handleAdd}><img src="/img/plus.svg" alt="add" /></button></span>
             </div>
-            <AllTodo todolist={todos} handleDelete={handleDelete}/>
+            <AllTodo todolist={todos} handleDelete={handleDelete} handleDone={handleDone}/>
         </div>
     )
 }
 
-function OneTodo({text , id, handleDelete}) {
+function OneTodo({text , id, handleDelete, handleDone, done}) {
     const [showMenu, setShowMenu] = useState(false);
-    const handleClick = () => {
+    const handleMenu = () => {
         setShowMenu(!showMenu)
     }
     const ref = useRef(null)
@@ -44,13 +58,13 @@ function OneTodo({text , id, handleDelete}) {
     }, [])
     
     return(
-        <div className={styles.onetodocontainer} ref={ref}>
-            <div className={styles.todo}>{text}</div>
-            <div className={styles.optionsbutton} onClick={handleClick}>
-                <img src="/img/options.svg" alt="options"/>
+        <div className={`${styles.onetodocontainer} ${done ? styles.done : ""}`} ref={ref}>
+            <div className={`${styles.todo}`}>{text}</div>
+            <div className={styles.optionsbutton} onClick={handleMenu}>
+                <img src={optionsIcon} alt="options"/>
                 {showMenu && (
                 <div className={styles.optionsMenu}>
-                    <div className={`${styles.option} ${styles.a}`}>done</div>
+                    <div className={`${styles.option} ${styles.a}`} onClick={() => handleDone(id)}>{done ? "ongoing" : "finished"}</div>
                     <div className={`${styles.option} ${styles.b}`} onClick={() => handleDelete(id)}>delete</div>
                 </div>
                 )}
@@ -59,12 +73,12 @@ function OneTodo({text , id, handleDelete}) {
     )
 }
 
-function AllTodo({ todolist, handleDelete }) {
+function AllTodo({ todolist, handleDelete, handleDone }) {
 
     return(
         <div className={styles.alltodocontainer}>
             {todolist.map((todo) => (
-                <OneTodo key={todo.id} text={todo.text} id={todo.id} handleDelete={handleDelete}/>
+                <OneTodo key={todo.id} text={todo.text} id={todo.id} handleDelete={handleDelete} handleDone={handleDone} done={todo.isDone} />
             ))}
         </div>
     )

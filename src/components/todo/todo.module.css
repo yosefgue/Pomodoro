@@ -56,7 +56,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #2424249d ;
+    background-color: #2020209d ;
     width: 550px;
     border-radius: 15px;
     padding: 15px 15px;
@@ -91,6 +91,10 @@
     word-break: break-word;
     font-size: 18px;
     font-weight: 500;
+}
+.onetodocontainer.done {
+    text-decoration: line-through;
+    background-color: #0a0a0abd;
 }
 
 .optionsMenu {
