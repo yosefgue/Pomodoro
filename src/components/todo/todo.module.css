@@ -22,7 +22,7 @@
     height: 35px;
     font-size: 20px;
     padding: 10px;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
 }
 
 .input {
@@ -37,7 +37,7 @@
     font-size: 20px;
     font-weight: 500;
     outline: none;
-    transition: width 0.5s ease, height 0.5s ease;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .input:focus {
@@ -60,12 +60,12 @@
     width: 550px;
     border-radius: 15px;
     padding: 15px 15px;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
 }
 
 .optionsbutton img {
-    height: 15px;
-    width: 15px;
+    height: 18px;
+    width: 18px;
 }
 .optionsbutton {
     cursor: pointer;
@@ -74,10 +74,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 }
 
 .optionsbutton:hover {
@@ -94,12 +94,17 @@
 }
 .onetodocontainer.done {
     text-decoration: line-through;
-    background-color: #0a0a0abd;
+    background-color: #0a0a0aef;
+}
+.checkmark {
+    height: 21px;
+    width: 21px;
+    padding: 0 5px;
 }
 
 .optionsMenu {
     position: absolute;
-    background-color: #181818;
+    background-color: #242424;
     bottom: 30px;
     border-radius: 15px;
     pointer-events: auto;
@@ -117,7 +122,7 @@
 }
 
 .option:hover {
-    background-color: rgba(37, 37, 37, 0.74);
+    background-color: rgba(53, 53, 53, 0.87);
 }
 
 @media (max-width: 768px) {
@@ -133,5 +138,8 @@
     }
     .optionsbutton:hover {
         scale: 1;
+    }
+    .optionsMenu {
+        right: 1px
     }
 }

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import styles from "./todo.module.css"
 import optionsIcon from "/img/options.svg";
+import checkmark from "/img/checkmark.svg";
 
 export default function Todo() {
     const [inputValue, setInputValue] = useState("");
@@ -60,6 +61,7 @@ function OneTodo({text , id, handleDelete, handleDone, done}) {
     return(
         <div className={`${styles.onetodocontainer} ${done ? styles.done : ""}`} ref={ref}>
             <div className={`${styles.todo}`}>{text}</div>
+            {done ? (<img className={styles.checkmark} src={checkmark} alt="completed" />) : null}
             <div className={styles.optionsbutton} onClick={handleMenu}>
                 <img src={optionsIcon} alt="options"/>
                 {showMenu && (
