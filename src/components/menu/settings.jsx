@@ -2,12 +2,13 @@ import { useRef, useEffect, useState } from "react"
 import styles from "./settings.module.css"
 import closeIcon from "/img/close.svg"
 
-export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer }) {
+export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn }) {
     const maxInputLength = 4;
     const ref = useRef(null)
     const [temporaryFocusTimer, setTemporaryFocusTimer] = useState(focusTimer);
     const [temporaryBreakTimer, setTemporaryBreakTimer] = useState(breakTimer);
     const [temporaryLongBreakTimer, setTemporaryLongBreakTimer] = useState(longBreakTimer);
+    const [temporaryIsBackgroundOn, setTemporaryIsBackgroundOn] = useState(isBackgroundOn)
     
     const onlyNums = (e, setValue) => {
         const value = e.target.value ;
@@ -28,7 +29,12 @@ export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFo
         setFocusTimer(temporaryFocusTimer)
         setBreakTimer(temporaryBreakTimer)
         setLongBreakTimer(temporaryLongBreakTimer)
+        setIsBackgroundOn(temporaryIsBackgroundOn)
         toggle(false)
+    }
+
+    const toggleBackground = () => {
+        setTemporaryIsBackgroundOn(() => !temporaryIsBackgroundOn)
     }
 
     return(
@@ -57,6 +63,13 @@ export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFo
                         <input id="longbreak" type="text" inputMode="numeric" value={temporaryLongBreakTimer} onChange={(e) => onlyNums(e, setTemporaryLongBreakTimer)}/>
                         <div className={styles.minutes}>mins</div>
                     </div>
+                </div>
+                <div className={styles.slidercontainer}>
+                    <label htmlFor="toggle">background</label>
+                    <span className={styles.toggle_switch}>
+                        <input className={styles.toggle_input} id="toggle" type="checkbox" onChange={toggleBackground} checked={temporaryIsBackgroundOn}/>
+                        <label className={styles.toggle_label} htmlFor="toggle"></label>
+                    </span>
                 </div>
                 <button className={styles.savebutton} type="submit" onClick={() => savechanges()}>save changes</button>
             </div>

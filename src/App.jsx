@@ -8,11 +8,13 @@ export default function App() {
   const [focusTimer, setFocusTimer] = useState(5);
   const [breakTimer, setBreakTimer] = useState(10);
   const [longBreakTimer, setLongBreakTimer] = useState(20);
+  const [isBackgroundOn, setIsBackgroundOn] = useState(true);
 
   return (
     <>
+      {isBackgroundOn && <Background/>}
       <MenuOptions toggle={setIsSettingsOn}/>
-      {isSettingsOn && <Settings 
+      {isSettingsOn && <Settings
       toggle={setIsSettingsOn}
       focusTimer={focusTimer}
       breakTimer={breakTimer}
@@ -20,6 +22,8 @@ export default function App() {
       setFocusTimer={setFocusTimer}
       setBreakTimer={setBreakTimer}
       setLongBreakTimer={setLongBreakTimer}
+      setIsBackgroundOn={setIsBackgroundOn}
+      isBackgroundOn={isBackgroundOn}
       />}
       <Timer 
       focusTimer={focusTimer}
@@ -37,5 +41,11 @@ function MenuOptions({ toggle }) {
       <button><img src="/img/settings.svg" alt="settings" onClick={() => toggle(true)}/></button>
       <button><img src="/img/about.svg" alt="about" /></button>
     </div>
+  )
+}
+
+function Background() {
+  return(
+    <div className="background"></div>
   )
 }

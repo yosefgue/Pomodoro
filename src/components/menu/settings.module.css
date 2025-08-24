@@ -107,3 +107,58 @@ button {
 .close:hover {
     scale: 1.2;
 }
+
+/* slider */
+.slidercontainer {
+    display: flex;
+    flex-direction: row;
+    align-self: start;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 25px;
+
+}
+
+.toggle_switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle_input {
+  display: none;
+}
+
+.toggle_label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 20px;
+  border-radius: 17px;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.toggle_label:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.toggle_input:checked + .toggle_label {
+  background-color: #86d993;
+}
+
+.toggle_input:checked + .toggle_label:before {
+  transform: translateX(18px);
+}
