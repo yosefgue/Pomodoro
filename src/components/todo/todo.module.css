@@ -47,6 +47,7 @@
 .alltodocontainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     margin: 20px 0;
 }
@@ -59,7 +60,7 @@
     background-color: #1d1d1dec ;
     width: 550px;
     border-radius: 15px;
-    padding: 15px 15px;
+    padding: 15px 10px;
     transition: 0.3s ease;
 }
 
@@ -99,7 +100,7 @@
 .checkmark {
     height: 21px;
     width: 21px;
-    padding: 0 5px;
+    padding: 0 3px;
 }
 
 .optionsMenu {

@@ -3,10 +3,9 @@ import styles from "./timer.module.css";
 
 export default function Timer({focusTimer, breakTimer, longBreakTimer}) {
     const [mode, setMode] = useState("focus");
-    const currentTimer = mode == "focus" ? focusTimer : breakTimer;
 
     const [focusCount, setFocusCount] = useState(0);
-    const initialTimerValue = useRef(currentTimer);
+    const initialTimerValue = useRef(focusTimer);
     const remainingSeconds = useRef(initialTimerValue.current);
     const [isTimerOn, setIsTimerOn] = useState(false);
     const [seconds, setSeconds] = useState(initialTimerValue.current);
@@ -64,6 +63,10 @@ export default function Timer({focusTimer, breakTimer, longBreakTimer}) {
             clearInterval(intervalID)
         }
     }, [isTimerOn, mode, focusCount])
+
+    useEffect(() => {
+        handleReset(focusTimer, {stopTimer: true, resetMode: true, resetFocusCount: true, resetText: true })
+    },[focusTimer, breakTimer, longBreakTimer])
 
     const handleStartStop = () => {
         setIsTimerOn((previousTimerState) => !previousTimerState)
