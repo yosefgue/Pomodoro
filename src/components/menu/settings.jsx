@@ -5,9 +5,11 @@ import closeIcon from "/img/close.svg"
 export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn }) {
     const maxInputLength = 4;
     const ref = useRef(null)
-    const [temporaryFocusTimer, setTemporaryFocusTimer] = useState(focusTimer);
-    const [temporaryBreakTimer, setTemporaryBreakTimer] = useState(breakTimer);
-    const [temporaryLongBreakTimer, setTemporaryLongBreakTimer] = useState(longBreakTimer);
+    const toSeconds = (minutes) => minutes * 60;
+    const toMinutes = (seconds) => seconds / 60;
+    const [temporaryFocusTimer, setTemporaryFocusTimer] = useState(toMinutes(focusTimer));
+    const [temporaryBreakTimer, setTemporaryBreakTimer] = useState(toMinutes(breakTimer));
+    const [temporaryLongBreakTimer, setTemporaryLongBreakTimer] = useState(toMinutes(longBreakTimer));
     const [temporaryIsBackgroundOn, setTemporaryIsBackgroundOn] = useState(isBackgroundOn)
     
     const onlyNums = (e, setValue) => {
@@ -26,9 +28,9 @@ export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFo
     }, [toggle])
 
     const savechanges = () => {
-        setFocusTimer(temporaryFocusTimer)
-        setBreakTimer(temporaryBreakTimer)
-        setLongBreakTimer(temporaryLongBreakTimer)
+        setFocusTimer(toSeconds(temporaryFocusTimer))
+        setBreakTimer(toSeconds(temporaryBreakTimer))
+        setLongBreakTimer(toSeconds(temporaryLongBreakTimer))
         setIsBackgroundOn(temporaryIsBackgroundOn)
         toggle(false)
     }

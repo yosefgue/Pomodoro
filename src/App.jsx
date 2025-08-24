@@ -5,10 +5,10 @@ import { Settings } from "./components/menu/settings.jsx"
 
 export default function App() {
   const [isSettingsOn, setIsSettingsOn] = useState(false)
-  const [focusTimer, setFocusTimer] = useState(5);
-  const [breakTimer, setBreakTimer] = useState(10);
-  const [longBreakTimer, setLongBreakTimer] = useState(20);
-  const [isBackgroundOn, setIsBackgroundOn] = useState(true);
+  const [isBackgroundOn, setIsBackgroundOn] = useState(false);
+  const [focusTimer, setFocusTimer] = useState(25 * 60);
+  const [breakTimer, setBreakTimer] = useState(5 * 60);
+  const [longBreakTimer, setLongBreakTimer] = useState(20 * 60);
 
   return (
     <>

@@ -21,7 +21,7 @@ button {
     justify-content: space-between;
     align-items: center;
     background-color: #1f1f1f96 ;
-    height: 200px;
+    height: 250px;
     width: 400px;
     z-index: 9999;
     border-radius: 20px;
@@ -115,7 +115,7 @@ button {
     align-self: start;
     align-items: center;
     gap: 5px;
-    margin: 10px 25px;
+    margin: 0 25px;
 
 }
 
