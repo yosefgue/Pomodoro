@@ -56,7 +56,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #2020209d ;
+    background-color: #1d1d1dec ;
     width: 550px;
     border-radius: 15px;
     padding: 15px 15px;
@@ -94,7 +94,7 @@
 }
 .onetodocontainer.done {
     text-decoration: line-through;
-    background-color: #0a0a0aef;
+    background-color: #0a0a0aec;
 }
 .checkmark {
     height: 21px;

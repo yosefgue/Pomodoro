@@ -5,11 +5,27 @@ import { Settings } from "./components/menu/settings.jsx"
 
 export default function App() {
   const [isSettingsOn, setIsSettingsOn] = useState(false)
+  const [focusTimer, setFocusTimer] = useState(5);
+  const [breakTimer, setBreakTimer] = useState(10);
+  const [longBreakTimer, setLongBreakTimer] = useState(20);
+
   return (
     <>
       <MenuOptions toggle={setIsSettingsOn}/>
-      {isSettingsOn && <Settings toggle={setIsSettingsOn}/>}
-      <Timer />
+      {isSettingsOn && <Settings 
+      toggle={setIsSettingsOn}
+      focusTimer={focusTimer}
+      breakTimer={breakTimer}
+      longBreakTimer={longBreakTimer}
+      setFocusTimer={setFocusTimer}
+      setBreakTimer={setBreakTimer}
+      setLongBreakTimer={setLongBreakTimer}
+      />}
+      <Timer 
+      focusTimer={focusTimer}
+      breakTimer={breakTimer}
+      longBreakTimer={longBreakTimer}
+      />
       <Todo />
     </>
   )

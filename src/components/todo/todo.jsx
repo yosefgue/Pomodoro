@@ -1,10 +1,34 @@
-import { useTodo, useOneTodo } from "./useTodo.jsx"
+import {useState, useEffect, useRef} from "react"
 import styles from "./todo.module.css"
 import optionsIcon from "/img/options.svg";
 import checkmark from "/img/checkmark.svg";
 
 export default function Todo() {
-    const {inputValue, setInputValue, todos, handleAdd, handleDelete, handleEnter, handleDone} = useTodo();
+    const [inputValue, setInputValue] = useState("");
+    const [todos, setTodos] = useState([]);
+
+    const handleAdd = () => {
+        if (inputValue == "") return;
+        setTodos([...todos, {id: Date.now(), text: inputValue, isDone: false}])
+        setInputValue("")
+    }
+
+    const handleDelete = (id) => {
+        setTodos(todos.filter((todo) => todo.id !== id))
+    }
+
+    const handleEnter = (e) => {
+        if (inputValue == "") return;
+        if (e.key === "Enter") {
+            setTodos([...todos, {id: Date.now(), text: inputValue, isDone: false}])
+            setInputValue("")
+        }
+    }
+
+    const handleDone = (id) => {
+        setTodos(todos.map((todo) => todo.id === id ? {...todo, isDone: !todo.isDone} : todo
+        ))
+    }
 
     return(
         <div className={styles.maincontainer}>
@@ -18,7 +42,21 @@ export default function Todo() {
 }
 
 function OneTodo({text , id, handleDelete, handleDone, done}) {
-    const {showMenu, ref, handleMenu} = useOneTodo();
+    const [showMenu, setShowMenu] = useState(false);
+    const handleMenu = () => {
+        setShowMenu(!showMenu)
+    }
+    const ref = useRef(null)
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) setShowMenu(false);
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
 
     return(
         <div className={`${styles.onetodocontainer} ${done ? styles.done : ""}`} ref={ref}>
