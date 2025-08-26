@@ -2,9 +2,11 @@ import Timer from "./components/timer/timer.jsx"
 import Todo from "./components/todo/todo.jsx"
 import { useState } from "react"
 import { Settings } from "./components/menu/settings.jsx"
+import About from "./components/about/about.jsx"
 
 export default function App() {
-  const [isSettingsOn, setIsSettingsOn] = useState(false)
+  const [isSettingsOn, setIsSettingsOn] = useState(false);
+  const [isAboutOn, setIsAboutOn] = useState(false);
   const [isBackgroundOn, setIsBackgroundOn] = useState(false);
   const [focusTimer, setFocusTimer] = useState(25 * 60);
   const [breakTimer, setBreakTimer] = useState(5 * 60);
@@ -13,9 +15,9 @@ export default function App() {
   return (
     <>
       {isBackgroundOn && <Background/>}
-      <MenuOptions toggle={setIsSettingsOn}/>
+      <MenuOptions toggleSettings={setIsSettingsOn} toggleAbout={setIsAboutOn}/>
       {isSettingsOn && <Settings
-      toggle={setIsSettingsOn}
+      toggleSettings={setIsSettingsOn}
       focusTimer={focusTimer}
       breakTimer={breakTimer}
       longBreakTimer={longBreakTimer}
@@ -31,15 +33,16 @@ export default function App() {
       longBreakTimer={longBreakTimer}
       />
       <Todo />
+      {isAboutOn && <About toggleAbout={setIsAboutOn}/>}
     </>
   )
 }
 
-function MenuOptions({ toggle }) {
+function MenuOptions({ toggleSettings, toggleAbout }) {
   return(
     <div className="menucontainer">
-      <button><img src="/img/settings.svg" alt="settings" onClick={() => toggle(true)}/></button>
-      <button><img src="/img/about.svg" alt="about" /></button>
+      <button><img src="/img/settings.svg" alt="settings" onClick={() => toggleSettings(true)}/></button>
+      <button><img src="/img/about.svg" alt="about" onClick={() => toggleAbout(true)}/></button>
     </div>
   )
 }

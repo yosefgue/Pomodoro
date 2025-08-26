@@ -3,7 +3,7 @@ import styles from "./settings.module.css"
 import closeIcon from "/img/close.svg"
 import useClickAway from "/src/hooks/useClickAway.jsx"
 
-export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn }) {
+export function Settings({ toggleSettings, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn }) {
     const maxInputLength = 4;
     const ref = useRef(null)
     const toSeconds = (minutes) => minutes * 60;
@@ -20,14 +20,14 @@ export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFo
         }
     }
 
-    useClickAway(ref, toggle)
+    useClickAway(ref, toggleSettings)
 
     const savechanges = () => {
         setFocusTimer(toSeconds(temporaryFocusTimer))
         setBreakTimer(toSeconds(temporaryBreakTimer))
         setLongBreakTimer(toSeconds(temporaryLongBreakTimer))
         setIsBackgroundOn(temporaryIsBackgroundOn)
-        toggle(false)
+        toggleSettings(false)
     }
 
     const toggleBackground = () => {
@@ -40,7 +40,7 @@ export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFo
             <div className={styles.settingsmenu} ref={ref}>
                 <div className={styles.titlecontainer}>
                     <div>timer settings</div>
-                    <button className={styles.close} onClick={() => toggle(false)}>
+                    <button className={styles.close} onClick={() => toggleSettings(false)}>
                         <img src={closeIcon} alt="close" />
                     </button>
                 </div>
