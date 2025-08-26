@@ -37,7 +37,7 @@ export default function Timer({focusTimer, breakTimer, longBreakTimer}) {
                 if (mode == "focus") {
                     setFocusCount((count) =>count + 1)
                     const updatedfocusCount = focusCount + 1; // react doesn't update state instantly only after the next render, so manual save, there is probably a better solution
-                    if (updatedfocusCount % 4 == 0) {
+                    if (updatedfocusCount % 4 === 0) {
                         handleReset(longBreakTimer, {resetMode: true, mode: "longbreak"})
                     }
                     else {
@@ -51,21 +51,21 @@ export default function Timer({focusTimer, breakTimer, longBreakTimer}) {
             };
         }, 100)
 
-        if (mode == "focus") {
+           if (mode == "focus") {
                 setText(textOptions.focus);
             } else if (mode == "break") {
                 setText(textOptions.break);
             } else {
                 setText(textOptions.longbreak);
             }
-            
+
         return () => {
             clearInterval(intervalID)
         }
     }, [isTimerOn, mode, focusCount])
 
     useEffect(() => {
-        handleReset(focusTimer, {stopTimer: true, resetMode: true, resetFocusCount: true, resetText: true })
+        handleReset(focusTimer, {stopTimer: true, resetMode: true, mode: "focus" ,resetFocusCount: true, resetText: true })
     },[focusTimer, breakTimer, longBreakTimer])
 
     const handleStartStop = () => {

@@ -1,6 +1,7 @@
-import { useRef, useEffect, useState } from "react"
+import { useRef, useState } from "react"
 import styles from "./settings.module.css"
 import closeIcon from "/img/close.svg"
+import useClickAway from "/src/hooks/useClickAway.jsx"
 
 export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn }) {
     const maxInputLength = 4;
@@ -19,13 +20,7 @@ export function Settings({ toggle, focusTimer, breakTimer, longBreakTimer, setFo
         }
     }
 
-    useEffect (() => {
-        const clickAway = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) toggle(false);
-        }
-            document.addEventListener("mousedown", clickAway)
-            return () => document.removeEventListener("mousedown", clickAway)
-    }, [toggle])
+    useClickAway(ref, toggle)
 
     const savechanges = () => {
         setFocusTimer(toSeconds(temporaryFocusTimer))

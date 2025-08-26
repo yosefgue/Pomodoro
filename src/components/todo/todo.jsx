@@ -1,7 +1,8 @@
-import {useState, useEffect, useRef} from "react"
+import {useState, useRef} from "react"
 import styles from "./todo.module.css"
 import optionsIcon from "/img/options.svg";
 import checkmark from "/img/checkmark.svg";
+import useClickAway from "/src/hooks/useClickAway.jsx"
 
 export default function Todo() {
     const [inputValue, setInputValue] = useState("");
@@ -48,15 +49,7 @@ function OneTodo({text , id, handleDelete, handleDone, done}) {
     }
     const ref = useRef(null)
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (ref.current && !ref.current.contains(event.target)) setShowMenu(false);
-        }
-        document.addEventListener("mousedown", handleClickOutside)
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside)
-        }
-    }, [])
+    useClickAway(ref, setShowMenu)
 
     return(
         <div className={`${styles.onetodocontainer} ${done ? styles.done : ""}`} ref={ref}>
