@@ -10,7 +10,7 @@ const storedTodos = () => {
 }
 
 export default function Todo() {
-    const [inputValue, setInputValue] = useState();
+    const [inputValue, setInputValue] = useState("");
     const [todos, setTodos] = useState(() => storedTodos());
 
     useEffect(() => {
