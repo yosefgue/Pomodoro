@@ -1,12 +1,21 @@
-import {useState, useRef} from "react"
+import {useState, useRef, useEffect} from "react"
 import styles from "./todo.module.css"
 import optionsIcon from "/img/options.svg";
 import checkmark from "/img/checkmark.svg";
 import useClickAway from "/src/hooks/useClickAway.jsx"
 
+const storedTodos = () => {
+    const todolist = localStorage.getItem("todos");
+    return todolist ? JSON.parse(todolist) : []
+}
+
 export default function Todo() {
-    const [inputValue, setInputValue] = useState("");
-    const [todos, setTodos] = useState([]);
+    const [inputValue, setInputValue] = useState();
+    const [todos, setTodos] = useState(() => storedTodos());
+
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos))
+    }, [todos])
 
     const handleAdd = () => {
         if (inputValue == "") return;
