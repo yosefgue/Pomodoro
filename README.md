@@ -1,12 +1,27 @@
-# React + Vite
+# Pomodoro Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Pomodoro Timer Screenshot 1](/img/screenshots/screen1.png)  
+![Pomodoro Timer Screenshot 2](/img/screenshots/screen1.png)  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What is the Pomodoro Technique?  
+The Pomodoro Technique is a time management method where you break work into focused intervals (usually 25 minutes), separated by short breaks. After a few rounds, you take a longer break. The idea is simple but powerful: it helps you stay focused while still giving your brain time to rest.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Why I Built This  
+I’ve been using the Pomodoro Technique for a while now, and honestly, it has made a big difference in how I work. But I always felt like the tools I used were either too complex or didn’t quite fit the way I wanted to work.  
+
+So, I decided to build my own Pomodoro app — mainly for myself. It’s something simple, lightweight, and exactly how I like it. Think of it as a little side project that grew into something I actually use every day.
+
+---
+
+## About the App  
+This app is built with **React**.
+
+The focus here wasn’t on making the fanciest app, but on creating something **useful and personal**. I like the idea of building tools that actually make my daily life better, and this app is exactly that.
+
+---
+
+That’s it — a small project that makes my day-to-day a little easier, and maybe it can do the same for you too.
