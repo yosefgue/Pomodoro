@@ -17,8 +17,8 @@ export default function App() {
   const [isAboutOn, setIsAboutOn] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [isBackgroundOn, setIsBackgroundOn] = useState(() => storedIsBackgroundOn());
-  const [focusTimer, setFocusTimer] = useState(10);
-  const [breakTimer, setBreakTimer] = useState(5);
+  const [focusTimer, setFocusTimer] = useState(() => storedFocusTimer());
+  const [breakTimer, setBreakTimer] = useState(() => storedBreakTimer());
   const [longBreakTimer, setLongBreakTimer] = useState(() => storedLongBreakTimer());
 
   useEffect(() => {
