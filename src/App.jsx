@@ -15,9 +15,10 @@ const storedIsBackgroundOn = () => {
 export default function App() {
   const [isSettingsOn, setIsSettingsOn] = useState(false);
   const [isAboutOn, setIsAboutOn] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(true);
   const [isBackgroundOn, setIsBackgroundOn] = useState(() => storedIsBackgroundOn());
-  const [focusTimer, setFocusTimer] = useState(() => storedFocusTimer());
-  const [breakTimer, setBreakTimer] = useState(() => storedBreakTimer());
+  const [focusTimer, setFocusTimer] = useState(10);
+  const [breakTimer, setBreakTimer] = useState(5);
   const [longBreakTimer, setLongBreakTimer] = useState(() => storedLongBreakTimer());
 
   useEffect(() => {
@@ -47,11 +48,14 @@ export default function App() {
       setLongBreakTimer={setLongBreakTimer}
       setIsBackgroundOn={setIsBackgroundOn}
       isBackgroundOn={isBackgroundOn}
+      isSoundOn = {isSoundOn}
+      setIsSoundOn = {setIsSoundOn}
       />}
       <Timer 
       focusTimer={focusTimer}
       breakTimer={breakTimer}
       longBreakTimer={longBreakTimer}
+      isSoundOn = {isSoundOn}
       />
       <Todo />
       {isAboutOn && <About toggleAbout={setIsAboutOn}/>}

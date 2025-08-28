@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./timer.module.css";
 
-export default function Timer({focusTimer, breakTimer, longBreakTimer}) {
+const focusAudio = new Audio("/sound/focus.mp3");
+const breakAudio = new Audio("/sound/break.mp3")
+
+export default function Timer({focusTimer, breakTimer, longBreakTimer, isSoundOn}) {
     const [mode, setMode] = useState("focus");
 
     const [focusCount, setFocusCount] = useState(0);
@@ -65,8 +68,21 @@ export default function Timer({focusTimer, breakTimer, longBreakTimer}) {
     }, [isTimerOn, mode, focusCount])
 
     useEffect(() => {
+        if (isSoundOn) {
+            if (remainingSeconds.current <= 0 && mode === "focus") {
+                breakAudio.play()
+            }
+            else if (remainingSeconds.current <= 0 && mode === "break") {
+                focusAudio.play()
+            }
+        }
+    }, [remainingSeconds.current])
+
+    useEffect(() => {
         handleReset(focusTimer, {stopTimer: true, resetMode: true, mode: "focus" ,resetFocusCount: true, resetText: true })
     },[focusTimer, breakTimer, longBreakTimer])
+
+
 
     const handleStartStop = () => {
         setIsTimerOn((previousTimerState) => !previousTimerState)

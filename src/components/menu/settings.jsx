@@ -3,7 +3,7 @@ import styles from "./settings.module.css"
 import closeIcon from "/img/close.svg"
 import useClickAway from "/src/hooks/useClickAway.jsx"
 
-export function Settings({ toggleSettings, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn }) {
+export function Settings({ toggleSettings, focusTimer, breakTimer, longBreakTimer, setFocusTimer, setBreakTimer, setLongBreakTimer, isBackgroundOn, setIsBackgroundOn, isSoundOn, setIsSoundOn }) {
     const maxInputLength = 4;
     const ref = useRef(null)
     const toSeconds = (minutes) => minutes * 60;
@@ -11,7 +11,8 @@ export function Settings({ toggleSettings, focusTimer, breakTimer, longBreakTime
     const [temporaryFocusTimer, setTemporaryFocusTimer] = useState(toMinutes(focusTimer));
     const [temporaryBreakTimer, setTemporaryBreakTimer] = useState(toMinutes(breakTimer));
     const [temporaryLongBreakTimer, setTemporaryLongBreakTimer] = useState(toMinutes(longBreakTimer));
-    const [temporaryIsBackgroundOn, setTemporaryIsBackgroundOn] = useState(isBackgroundOn)
+    const [temporaryIsBackgroundOn, setTemporaryIsBackgroundOn] = useState(isBackgroundOn);
+    const [temporaryIsSoundOn, setTemporaryIsSoundOn] = useState(isSoundOn);
     
     const onlyNums = (e, setValue) => {
         const value = e.target.value ;
@@ -28,10 +29,15 @@ export function Settings({ toggleSettings, focusTimer, breakTimer, longBreakTime
         setLongBreakTimer(toSeconds(temporaryLongBreakTimer))
         setIsBackgroundOn(temporaryIsBackgroundOn)
         toggleSettings(false)
+        setIsSoundOn(temporaryIsSoundOn)
     }
 
     const toggleBackground = () => {
         setTemporaryIsBackgroundOn(() => !temporaryIsBackgroundOn)
+    }
+
+    const toggleSound= () => {
+        setTemporaryIsSoundOn(() => !temporaryIsSoundOn)
     }
 
     return(
@@ -62,10 +68,17 @@ export function Settings({ toggleSettings, focusTimer, breakTimer, longBreakTime
                     </div>
                 </div>
                 <div className={styles.slidercontainer}>
-                    <label htmlFor="toggle">background</label>
+                    <label htmlFor="toggleBackground">background</label>
                     <span className={styles.toggle_switch}>
-                        <input className={styles.toggle_input} id="toggle" type="checkbox" onChange={toggleBackground} checked={temporaryIsBackgroundOn}/>
-                        <label className={styles.toggle_label} htmlFor="toggle"></label>
+                        <input className={styles.toggle_input} id="toggleBackground" type="checkbox" onChange={toggleBackground} checked={temporaryIsBackgroundOn}/>
+                        <label className={styles.toggle_label} htmlFor="toggleBackground"></label>
+                    </span>
+                </div>
+                <div className={styles.slidercontainer}>
+                    <label htmlFor="toggleSound">sound</label>
+                    <span className={styles.toggle_switch}>
+                        <input className={styles.toggle_input} id="toggleSound" type="checkbox" onChange={toggleSound} checked={temporaryIsSoundOn}/>
+                        <label className={styles.toggle_label} htmlFor="toggleSound"></label>
                     </span>
                 </div>
                 <button className={styles.savebutton} type="submit" onClick={() => savechanges()}>save changes</button>
