@@ -95,7 +95,7 @@
 }
 .onetodocontainer.done {
     text-decoration: line-through;
-    background-color: #111111;
+    background-color: #080808;
 }
 .checkmark {
     height: 21px;
