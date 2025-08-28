@@ -1,7 +1,6 @@
 # Pomodoro Web App
 
-![Pomodoro Timer Screenshot 1](/img/screenshots/screen1.png)  
-![Pomodoro Timer Screenshot 2](/img/screenshots/screen1.png)  
+preview : https://bomodoro.vercel.app/
 
 ---
 
