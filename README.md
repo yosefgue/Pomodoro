@@ -1,6 +1,6 @@
 # Pomodoro Web App
 
-preview : https://bomodoro.vercel.app/
+preview: https://bomodoro.vercel.app/
 
 ---
 
